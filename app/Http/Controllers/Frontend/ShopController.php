@@ -18,6 +18,7 @@ class ShopController extends Controller
 
 
 
+
         return view('frontend.shop.shop', compact('product'));
     }
 }
