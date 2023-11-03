@@ -113,10 +113,11 @@
                 </a>
             </li>
             <li>
-                <a class="right-sidebar-toggle">
+                <a href="{{route('home.index')}}">
                     <i class="fa fa-tasks"></i>
                 </a>
             </li>
+            Aó
         </ul>
 
     </nav>
