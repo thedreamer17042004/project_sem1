@@ -203,7 +203,7 @@ Route::group(['prefix' => 'frontend'], function() {
 
     // ORDER
 
-    Route::get('/checkout', [OrderController::class, 'checkout'])->name('checkout.index');
+    Route::get('/checkout', [OrderController::class, 'index'])->name('checkout.index');
 
 
     // ACCOUNT

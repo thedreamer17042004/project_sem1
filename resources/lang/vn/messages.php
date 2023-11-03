@@ -18,7 +18,7 @@ return [
         'infomation' => 'Thông tin chung',
         'code' => 'Mã sản phẩm',
         'made_in' => 'Xuất sứ',
-        'price' => 'Gía sản phẩm'
+        'price' => 'Giá sản phẩm'
       
        
     ],
