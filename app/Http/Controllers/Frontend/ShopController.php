@@ -16,7 +16,7 @@ class ShopController extends Controller
     {
 
 
-
+        $product = Product::all();
 
 
         return view('frontend.shop.shop', compact('product'));
