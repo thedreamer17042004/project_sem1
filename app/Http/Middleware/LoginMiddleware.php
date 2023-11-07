@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginMiddleware
 {
+
+
     /**
      * Handle an incoming request.
      *

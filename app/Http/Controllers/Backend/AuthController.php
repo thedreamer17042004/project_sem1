@@ -14,7 +14,7 @@ class AuthController extends Controller
     }
     public function index()
     {
-
+ 
         if (Auth::id() > 0) {
             return redirect()->route('dashboard.index');
         }
@@ -29,6 +29,7 @@ class AuthController extends Controller
             'email' => $request->input('email'),
             'password' => $request->input('password')
         ];
+
 
 
         if (Auth::attempt($credentials)) {
