@@ -27,60 +27,27 @@
                             <div class="product-slider-container">
                                 <div class="product-single-carousel owl-carousel owl-theme show-nav-hover">
                                     <div class="product-item">
-                                        <img class="product-single-image" src=""  />
+                                        {{-- <img class="product-single-image" src=""  /> --}}
+                                        <img src="{{ asset($product->image) }}" width="110" height="110" alt="" />
                                     </div>
                                 </div>
                                 
                             </div>
 
                             <div class="prod-thumbnail owl-dots">
-                                {{-- @foreach (json_decode($product->imgProduct->image) as $key => $item)
-                                    <div class="owl-dot test" id="thumbnail_{{$key}}">
-                                        <img src="{{ asset('upload_images/'.$item) }}" width="110" height="110" alt="product-thumbnail" />
+                               
+                                    <div class="owl-dot test" id="">
+                                        {{-- <img src="{{ asset($product->image) }}" width="110" height="110" alt="product-thumbnail" /> --}}
                                     </div>
-                                @endforeach --}}
+                           
                                 
                             </div>
                         </div>
                         <!-- End .product-single-gallery -->
                   
                         <div class="col-md-6 product-single-details">
-                            <h1 class="product-title">123</h1>
-                        x`
-                            <div class="product-nav">
-                                <div class="product-prev">
-                                    <a href="#">
-                                        <span class="product-link"></span>
-
-                                        <span class="product-popup">
-                                            <span class="box-content">
-                                              
-                                                <img alt="product" width="150" height="150"
-                                                {{-- src="{{ asset('upload_images/'.$img->image) }}" --}}
-                                                    style="padding-top: 0px;">
-
-                                                <span>Hot Black Suits</span>
-                                        </span>
-                                        </span>
-                                    </a>
-                                </div>
-
-                                <div class="product-next">
-                                    <a href="#">
-                                        <span class="product-link"></span>
-
-                                        <span class="product-popup">
-                                            <span class="box-content">
-                                                <img alt="product" width="150" height="150"
-                                                    src="assets/images/demoes/demo18/products/product-3.jpg"
-                                                    style="padding-top: 0px;">
-
-                                                <span>Long-Length 2.0</span>
-                                        </span>
-                                        </span>
-                                    </a>
-                                </div>
-                            </div>
+                            <h1 class="product-title"> {{$product->name}}</h1>
+                        
 
                             <div class="ratings-container">
                                 <div class="product-ratings">
@@ -98,13 +65,13 @@
 
                             <div class="price-box">
                                 {{-- <span class="old-price">$1,999.00</span> --}}
-                                <span class="new-price"> <b>$</b> </span>
+                                <span class="new-price"> <b>$ {{$product->price}}</b> </span>
                             </div>
                             <!-- End .price-box -->
 
                             <div class="product-desc">
                                 <p>
-                                    123
+                                   
                                     {{-- Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris
                                     placerat eleifend leo. --}}
                                 </p>
@@ -114,21 +81,21 @@
                             <ul class="single-info-list">
                                 <!---->
                                 <li>
-                                    SKU:
-                                    <strong>654613612</strong>
+                                    {{-- SKU:product-de
+                                    <strong>654613612</strong> --}}
                                 </li>
 
                                 <li>
                                     CATEGORY:
                                     <strong>
-                                        <a href="#" class="product-category">SHOES</a>
+                                        <a href="#" class="product-category">{{$product->catalogues->name}}</a>
                                     </strong>
                                 </li>
 
                                 <li>
-                                    TAGs:
+                                    {{-- TAGs:
                                     <strong><a href="#" class="product-category">CLOTHES</a></strong>,
-                                    <strong><a href="#" class="product-category">SWEATER</a></strong>
+                                    <strong><a href="#" class="product-category">SWEATER</a></strong> --}}
                                 </li>
                             </ul>
 
@@ -444,7 +411,7 @@
                     <div class="widget">
                         <div class="maga-sale-container custom-maga-sale-container">
                             <figure class="mega-image">
-                                <img src="assets/images/demoes/demo18/banners/banner-sidebar.jpg" class="w-100" alt="Banner Desc">
+                                <img src="{{ asset('assets/images/banners/banner-sidebar.jpg') }}" class="w-100" alt="Banner Desc">
                             </figure>
 
                             <div class="mega-content">
@@ -467,81 +434,35 @@
 
                         <div class="widget-body">
                             <div class="featured-col">
-                                <div class="product-default left-details product-widget">
-                                    <figure>
-                                        <a href="demo18-product.html">
-                                            <img src="assets/images/demoes/demo18/products/small/product-1.jpg" width="75" height="75" alt="product" />
-                                        </a>
-                                    </figure>
-                                    <div class="product-details">
-                                        <h3 class="product-title"> <a href="demo18-product.html">Backpack Sfs
-                                                Responder</a> </h3>
-                                        <div class="ratings-container">
-                                            <div class="product-ratings">
-                                                <span class="ratings" style="width:100%"></span>
-                                                <!-- End .ratings -->
-                                                <span class="tooltiptext tooltip-top"></span>
+                                @foreach ($products as $key => $item)
+                                    @if($key < 3)
+                                        <div class="product-default left-details product-widget">
+                                            <figure>
+                                                <a href="demo18-product.html">
+                                                    <img src="{{asset ($item->image)}}" width="75" height="75" alt="product" />
+                                                </a>
+                                            </figure>
+                                            <div class="product-details">
+                                                <h3 class="product-title"> <a href="demo18-product.html">{{$item->name}}</a> </h3>
+                                                <div class="ratings-container">
+                                                    <div class="product-ratings">
+                                                        <span class="ratings" style="width:100%"></span>
+                                                        <!-- End .ratings -->
+                                                        <span class="tooltiptext tooltip-top"></span>
+                                                    </div>
+                                                    <!-- End .product-ratings -->
+                                                </div>
+                                                <!-- End .product-container -->
+                                                <div class="price-box">
+                                                    <span class="product-price">$ {{$item->price}}</span>
+                                                </div>
+                                                <!-- End .price-box -->
                                             </div>
-                                            <!-- End .product-ratings -->
+                                            <!-- End .product-details -->
                                         </div>
-                                        <!-- End .product-container -->
-                                        <div class="price-box">
-                                            <span class="product-price">$185.00</span>
-                                        </div>
-                                        <!-- End .price-box -->
-                                    </div>
-                                    <!-- End .product-details -->
-                                </div>
-                                <div class="product-default left-details product-widget">
-                                    <figure>
-                                        <a href="demo18-product.html">
-                                            <img src="assets/images/demoes/demo18/products/small/product-2.jpg" width="75" height="75" alt="product" />
-                                        </a>
-                                    </figure>
-                                    <div class="product-details">
-                                        <h3 class="product-title"> <a href="demo18-product.html">Hot Black
-                                                Suits</a> </h3>
-                                        <div class="ratings-container">
-                                            <div class="product-ratings">
-                                                <span class="ratings" style="width:80%"></span>
-                                                <!-- End .ratings -->
-                                                <span class="tooltiptext tooltip-top"></span>
-                                            </div>
-                                            <!-- End .product-ratings -->
-                                        </div>
-                                        <!-- End .product-container -->
-                                        <div class="price-box">
-                                            <span class="product-price">$30.00</span>
-                                        </div>
-                                        <!-- End .price-box -->
-                                    </div>
-                                    <!-- End .product-details -->
-                                </div>
-                                <div class="product-default left-details product-widget">
-                                    <figure>
-                                        <a href="demo18-product.html">
-                                            <img src="assets/images/demoes/demo18/products/small/product-3.jpg" width="75" height="75" alt="product" />
-                                        </a>
-                                    </figure>
-                                    <div class="product-details">
-                                        <h3 class="product-title"> <a href="demo18-product.html">Long-Length
-                                                2.0</a> </h3>
-                                        <div class="ratings-container">
-                                            <div class="product-ratings">
-                                                <span class="ratings" style="width:75%"></span>
-                                                <!-- End .ratings -->
-                                                <span class="tooltiptext tooltip-top"></span>
-                                            </div>
-                                            <!-- End .product-ratings -->
-                                        </div>
-                                        <!-- End .product-container -->
-                                        <div class="price-box">
-                                            <span class="product-price">$49.00</span>
-                                        </div>
-                                        <!-- End .price-box -->
-                                    </div>
-                                    <!-- End .product-details -->
-                                </div>
+                                    @endif
+
+                                @endforeach
                             </div>
                             <!-- End .featured-col -->
                         </div>
@@ -554,6 +475,9 @@
         </div>
         <!-- End .row -->
 
+
+        <div class="fb-comments" data-href="http://127.0.0.1:8000/frontend/product-detail?productId=11#" data-width="200" data-numposts="100"></div>
+
         <div class="products-section pt-0">
             <h2 class="section-title">Related Products</h2>
 
@@ -563,241 +487,47 @@
                         'items': 5
                     }
                 } }">
-                <div class="product-default inner-quickview inner-icon">
-                    <figure>
-                        <a href="demo18-product.html">
-                            <img src="assets/images/demoes/demo18/products/product-7.jpg" width="205" height="205" alt="product">
-                        </a>
-                        <div class="btn-icon-group">
-                            <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
-                                    class="icon-shopping-cart"></i></a>
-                        </div>
-                        <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">Quick
-                            View</a>
-                    </figure>
-                    <div class="product-details">
-                        <div class="category-wrap">
-                            <div class="category-list">
-                                <a href="demo18-shop.html" class="product-category">category</a>
+                @foreach ($products as $item)
+                    <div class="product-default inner-quickview inner-icon">
+                        <figure>
+                            <a href="demo18-product.html">
+                                <img src="{{ asset($item->image) }}" width="205" height="205" alt="product">
+                            </a>
+                            <div class="btn-icon-group">
+                                <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
+                                        class="icon-shopping-cart"></i></a>
                             </div>
-                            <a href="wishlist.html" title="Wishlist" class="btn-icon-wish"><i
-                                    class="icon-heart"></i></a>
-                        </div>
-                        <h3 class="product-title">
-                            <a href="demo18-product.html">Backpack Sfs Responder</a>
-                        </h3>
-                        <div class="ratings-container">
-                            <div class="product-ratings">
-                                <span class="ratings" style="width:100%"></span>
-                                <!-- End .ratings -->
-                                <span class="tooltiptext tooltip-top"></span>
+                            <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">Quick
+                                View</a>
+                        </figure>
+                        <div class="product-details">
+                            <div class="category-wrap">
+                                <div class="category-list">
+                                    <a href="demo18-shop.html" class="product-category">{{$item->catalogues->name}}</a>
+                                </div>
+                                <a href="wishlist.html" title="Wishlist" class="btn-icon-wish"><i
+                                        class="icon-heart"></i></a>
                             </div>
-                            <!-- End .product-ratings -->
+                            <h3 class="product-title">
+                                <a href="demo18-product.html">{{$item->name}}</a>
+                            </h3>
+                            <div class="ratings-container">
+                                <div class="product-ratings">
+                                    <span class="ratings" style="width:100%"></span>
+                                    <!-- End .ratings -->
+                                    <span class="tooltiptext tooltip-top"></span>
+                                </div>
+                                <!-- End .product-ratings -->
+                            </div>
+                            <!-- End .product-container -->
+                            <div class="price-box">
+                                <span class="product-price">$ {{$item->price}}</span>
+                            </div>
+                            <!-- End .price-box -->
                         </div>
-                        <!-- End .product-container -->
-                        <div class="price-box">
-                            <span class="product-price">$185.00</span>
-                        </div>
-                        <!-- End .price-box -->
+                        <!-- End .product-details -->
                     </div>
-                    <!-- End .product-details -->
-                </div>
-                <div class="product-default inner-quickview inner-icon">
-                    <figure>
-                        <a href="demo18-product.html">
-                            <img src="assets/images/demoes/demo18/products/product-15.jpg" width="205" height="205" alt="product">
-                        </a>
-                        <div class="btn-icon-group">
-                            <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
-                                    class="icon-shopping-cart"></i></a>
-                        </div>
-                        <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">Quick
-                            View</a>
-                    </figure>
-                    <div class="product-details">
-                        <div class="category-wrap">
-                            <div class="category-list">
-                                <a href="demo18-shop.html" class="product-category">category</a>
-                            </div>
-                            <a href="wishlist.html" title="Wishlist" class="btn-icon-wish"><i
-                                    class="icon-heart"></i></a>
-                        </div>
-                        <h3 class="product-title">
-                            <a href="demo18-product.html">Converse Chuck Quarter</a>
-                        </h3>
-                        <div class="ratings-container">
-                            <div class="product-ratings">
-                                <span class="ratings" style="width:80%"></span>
-                                <!-- End .ratings -->
-                                <span class="tooltiptext tooltip-top"></span>
-                            </div>
-                            <!-- End .product-ratings -->
-                        </div>
-                        <!-- End .product-container -->
-                        <div class="price-box">
-                            <span class="product-price">$14.00</span>
-                        </div>
-                        <!-- End .price-box -->
-                    </div>
-                    <!-- End .product-details -->
-                </div>
-                <div class="product-default inner-quickview inner-icon">
-                    <figure>
-                        <a href="demo18-product.html">
-                            <img src="assets/images/demoes/demo18/products/product-13.jpg" width="205" height="205" alt="product">
-                        </a>
-                        <div class="btn-icon-group">
-                            <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
-                                    class="icon-shopping-cart"></i></a>
-                        </div>
-                        <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">Quick
-                            View</a>
-                    </figure>
-                    <div class="product-details">
-                        <div class="category-wrap">
-                            <div class="category-list">
-                                <a href="demo18-shop.html" class="product-category">category</a>
-                            </div>
-                            <a href="wishlist.html" title="Wishlist" class="btn-icon-wish"><i
-                                    class="icon-heart"></i></a>
-                        </div>
-                        <h3 class="product-title">
-                            <a href="demo18-product.html">Football Vapor 24/7</a>
-                        </h3>
-                        <div class="ratings-container">
-                            <div class="product-ratings">
-                                <span class="ratings" style="width:80%"></span>
-                                <!-- End .ratings -->
-                                <span class="tooltiptext tooltip-top"></span>
-                            </div>
-                            <!-- End .product-ratings -->
-                        </div>
-                        <!-- End .product-container -->
-                        <div class="price-box">
-                            <span class="product-price">$25.00</span>
-                        </div>
-                        <!-- End .price-box -->
-                    </div>
-                    <!-- End .product-details -->
-                </div>
-                <div class="product-default inner-quickview inner-icon">
-                    <figure>
-                        <a href="demo18-product.html">
-                            <img src="assets/images/demoes/demo18/products/product-8.jpg" width="205" height="205" alt="product">
-                        </a>
-                        <div class="btn-icon-group">
-                            <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
-                                    class="icon-shopping-cart"></i></a>
-                        </div>
-                        <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">Quick
-                            View</a>
-                    </figure>
-                    <div class="product-details">
-                        <div class="category-wrap">
-                            <div class="category-list">
-                                <a href="demo18-shop.html" class="product-category">category</a>
-                            </div>
-                            <a href="wishlist.html" title="Wishlist" class="btn-icon-wish"><i
-                                    class="icon-heart"></i></a>
-                        </div>
-                        <h3 class="product-title">
-                            <a href="demo18-product.html">Hot Black Suits</a>
-                        </h3>
-                        <div class="ratings-container">
-                            <div class="product-ratings">
-                                <span class="ratings" style="width:80%"></span>
-                                <!-- End .ratings -->
-                                <span class="tooltiptext tooltip-top"></span>
-                            </div>
-                            <!-- End .product-ratings -->
-                        </div>
-                        <!-- End .product-container -->
-                        <div class="price-box">
-                            <span class="product-price">$30.00</span>
-                        </div>
-                        <!-- End .price-box -->
-                    </div>
-                    <!-- End .product-details -->
-                </div>
-                <div class="product-default inner-quickview inner-icon">
-                    <figure>
-                        <a href="demo18-product.html">
-                            <img src="assets/images/demoes/demo18/products/product-4.jpg" width="205" height="205" alt="product">
-                        </a>
-                        <div class="btn-icon-group">
-                            <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
-                                    class="icon-shopping-cart"></i></a>
-                        </div>
-                        <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">Quick
-                            View</a>
-                    </figure>
-                    <div class="product-details">
-                        <div class="category-wrap">
-                            <div class="category-list">
-                                <a href="demo18-shop.html" class="product-category">category</a>
-                            </div>
-                            <a href="wishlist.html" title="Wishlist" class="btn-icon-wish"><i
-                                    class="icon-heart"></i></a>
-                        </div>
-                        <h3 class="product-title">
-                            <a href="demo18-product.html">Hyperadapt Shield Lite Half-Zip</a>
-                        </h3>
-                        <div class="ratings-container">
-                            <div class="product-ratings">
-                                <span class="ratings" style="width:100%"></span>
-                                <!-- End .ratings -->
-                                <span class="tooltiptext tooltip-top"></span>
-                            </div>
-                            <!-- End .product-ratings -->
-                        </div>
-                        <!-- End .product-container -->
-                        <div class="price-box">
-                            <span class="product-price">$299.00</span>
-                        </div>
-                        <!-- End .price-box -->
-                    </div>
-                    <!-- End .product-details -->
-                </div>
-                <div class="product-default inner-quickview inner-icon">
-                    <figure>
-                        <a href="demo18-product.html">
-                            <img src="assets/images/demoes/demo18/products/product-19.jpg" width="205" height="205" alt="product">
-                            <img src="assets/images/demoes/demo18/products/product-10.jpg" width="205" height="205" alt="product">
-                        </a>
-                        <div class="btn-icon-group">
-                            <a href="demo18-product.html" class="btn-icon btn-add-cart"><i
-                                    class="fa fa-arrow-right"></i></a>
-                        </div>
-                        <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">Quick
-                            View</a>
-                    </figure>
-                    <div class="product-details">
-                        <div class="category-wrap">
-                            <div class="category-list">
-                                <a href="demo18-shop.html" class="product-category">category</a>
-                            </div>
-                            <a href="wishlist.html" title="Wishlist" class="btn-icon-wish"><i
-                                    class="icon-heart"></i></a>
-                        </div>
-                        <h3 class="product-title">
-                            <a href="demo18-product.html">Jordan Flight</a>
-                        </h3>
-                        <div class="ratings-container">
-                            <div class="product-ratings">
-                                <span class="ratings" style="width:80%"></span>
-                                <!-- End .ratings -->
-                                <span class="tooltiptext tooltip-top"></span>
-                            </div>
-                            <!-- End .product-ratings -->
-                        </div>
-                        <!-- End .product-container -->
-                        <div class="price-box">
-                            <span class="product-price">$99.00 - $109.00</span>
-                        </div>
-                        <!-- End .price-box -->
-                    </div>
-                    <!-- End .product-details -->
-                </div>
+                @endforeach
             </div>
             <!-- End .products-slider -->
         </div>
@@ -805,7 +535,8 @@
     </div>
 </main>
 <!-- End .main -->
-
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v18.0" nonce="JIlKlKFa"></script>
 @endsection
 
 <style>

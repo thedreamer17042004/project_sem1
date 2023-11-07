@@ -72,7 +72,7 @@
                                         </li>
                                         <li><a href="{{route('contact.index')}}">Contact Us</a></li>
                                         <li><a href="{{route('login.index')}}">Login</a></li>
-                        <li><a href="{{route('auth.admin')}}">Login Admin</a></li>
+                                        <li><a href="{{route('auth.admin')}}">Login Admin</a></li>
 
                                         <li><a href="forgot-password.html">Forgot Password</a></li>
                                     </ul>
@@ -128,9 +128,11 @@
                             <!-- End .header-dropown -->
                         </div>
                         <!-- End .header-dropdowns -->
+                        {{-- {{Auth::check()}} --}}
                         @if (Auth::check()) 
+                        
                             {{Auth::user()->name}}| 
-                            <a href="" class="header-icon" title="logout">Logout</a>
+                            <a href="{{route('auth.logout')}}" class="header-icon" title="logout">Logout</a>
                         
                         @else 
                             <a href="{{route('login.index')}}" class="header-icon" title="login">Login</a>  
@@ -358,27 +360,13 @@
             <div class="products-filter-container bg-gray">
                 <div class="container-fluid">
                     <div class="row align-items-lg-stretch">
-                        <aside class="filter-sidebar col-lg-2">
-                            <div class="sidebar-wrapper">
-                                <h3 class="ls-n-10 text-uppercase text-primary">Sort By</h3>
-
-                                <ul class="check-filter-list">
-                                    <li><a href="#" class="active">All</a></li>
-                                    <li><a href="#">Accessories</a></li>
-                                    <li><a href="#">Electronics</a></li>
-                                    <li><a href="#">Men</a></li>
-                                    <li><a href="#">Shoes</a></li>
-                                    <li><a href="#">Women</a></li>
-                                </ul>
-                            </div>
-                            <!-- End .sidebar-wrapper -->
-                        </aside>
+                    
                         <!-- End .col-lg-3 -->
 
-                        <div class="col-lg-10">
+                        <div class="col-lg-12">
                             <div class="row product-ajax-grid mb-2">
                                 @foreach ( $products as $item)
-                                              <div class="col-6 col-md-4 col-lg-3 col-xl-5col">
+                                              <div class="col-6 col-md-4 col-lg-3 ">
                                     <div class="product-default inner-quickview inner-icon appear-animate" data-animation-name="fadeIn">
                                         <figure>
                                             <a href="{{ route('product-detail.index', [ 'productId' => $item->id ]) }}">
@@ -394,7 +382,7 @@
                                         <div class="product-details">
                                             <div class="category-wrap">
                                                 <div class="category-list">
-                                                    <a href="demo18-shop.html" class="product-category">category</a>
+                                                    <a href="demo18-shop.html" class="product-category">category: {{$item->catalogues->name}}</a>
                                                 </div>
                                                 <a href="wishlist.html" class="btn-icon-wish"><i
                                                         class="icon-heart"></i></a>
@@ -425,10 +413,14 @@
                             </div>
                             <!-- End .row -->
 
-                            <div class="product-more-container d-flex justify-content-center">
+                            {{-- <div class="product-more-container d-flex justify-content-center">
                                 <a href="ajax/demo18-ajax-products.html" class="btn btn-outline-dark loadmore">Load
                                     More...</a>
+                            </div> --}}
+                            <div class="paginat text-center">
+                                {{$products->links()}}
                             </div>
+                            
                             <!-- End .product-more-container -->
                         </div>
                         <!-- End .col-lg-9 -->
@@ -963,12 +955,26 @@
                             </h5>
                             <p class="widget-newsletter-content mb-0">Get all the latest information on Events, Sales and Offers.</p>
                         </div>
-                        <form action="#">
-                            <div class="footer-submit-wrapper d-flex">
-                                <input type="email" class="form-control" placeholder="Email address..." size="40" required>
-                                <button type="submit" class="btn btn-dark btn-sm">Subscribe</button>
-                            </div>
-                        </form>
+                        @if (Auth::check())
+                            @if(count($sub) > 0)
+                                <form action="{{ route('user.unsubscriber')}}" method="POST">
+                                    @csrf
+                                    {{-- @method("DELETE") --}}
+                                    <div class="footer-submit-wrapper d-flex">
+                                        <input type="hidden" class="form-control" value="{{$sub[0]->id}}" name="id" >
+                                        <button type="submit" class="btn btn-danger btn-sm">Huỷ</button>
+                                    </div>
+                                </form>
+                            @else
+                                <form action="{{ route('user.subscriber')}}" method="POST">
+                                    @csrf
+                                    <div class="footer-submit-wrapper d-flex">
+                                        <input type="hidden" class="form-control" value="{{Auth::user()->email}}" name="email" placeholder="Email address..." size="40" >
+                                        <button type="submit" class="btn btn-danger btn-sm">Subscribe</button>
+                                    </div>
+                                </form>
+                            @endif
+                        @endif
                     </div>
                     <div class="footer-right">
                         <div class="social-icons">
@@ -1163,7 +1169,6 @@
     <!-- Main JS File -->
     <script src="assets/js/main.min.js"></script>
 <script>(function(){var js = "window['__CF$cv$params']={r:'816905095e42b442',t:'MTY5NzM4Mjk1MC4xOTEwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='../../cdn-cgi/challenge-platform/h/g/scripts/jsd/dffb14d6/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>
-
 
 <!-- Mirrored from portotheme.com/html/porto_ecommerce/demo18.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Oct 2023 15:16:29 GMT -->
 </html>
