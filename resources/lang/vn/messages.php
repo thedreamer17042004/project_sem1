@@ -22,6 +22,27 @@ return [
       
        
     ],
+    'subscriber' => [
+        'index' => [
+            'title' => "Quản Lý Subscriber",
+            'tableHeading' => "Danh sách Subscriber "
+        ],
+        'create' => [
+            'title' => 'Thêm mới Subscriber'
+        ],
+        'update' => [
+            'title' => 'Cập nhật Subscriber'
+        ],
+        'delete' => [
+            'title' => 'Xóa Subscriber'
+        ],
+        'infomation' => 'Thông tin chung',
+        'code' => 'Mã sản phẩm',
+        'made_in' => 'Xuất sứ',
+        'price' => 'Giá sản phẩm'
+      
+       
+    ],
     'catalogue' => [
         'index' => [
             'title' => "Quản Lý Thuộc tính",
@@ -162,6 +183,7 @@ return [
     'tableStatus' => 'Tình Trạng',
     'tableAction' => 'Thao tác',
     'tableName' => 'Tiêu đề',
+    'tableEmail' => 'Email',
     'publish' => [
         '0' => "Chọn tình trạng",
         '1' => "Không Xuất bản",

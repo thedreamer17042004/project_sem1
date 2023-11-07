@@ -8,6 +8,15 @@
     <form class="form" action="" method="POST">
       @csrf
       <h1>Register</h1>
+
+      @if ($message = Session::get('err'))
+      <div class="alert alert-danger alert-block">
+           <button type="button" class="close" data-dismiss="alert">x</button>	
+      <strong>{{ $message }}</strong>
+
+      </div>
+
+      @endif
   
       <div class="flex-column">
         <a href="{{route('home.index')}}"><i class="fa-solid fa-house"></i> Home</a>

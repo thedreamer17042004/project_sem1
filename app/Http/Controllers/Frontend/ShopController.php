@@ -15,10 +15,9 @@ class ShopController extends Controller
     public function index()
     {
 
-
-        $product = Product::all();
-
-
+        $product = Product::paginate(12);
         return view('frontend.shop.shop', compact('product'));
+
+    
     }
 }

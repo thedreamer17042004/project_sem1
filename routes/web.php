@@ -16,6 +16,7 @@ use App\Http\Controllers\Backend\PostController;
 use App\Http\Controllers\Ajax\LocationController;
 use App\Http\Controllers\Backend\SubscriberController;
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\UserSubscriberController;
 use App\Http\Controllers\Frontend\Auth\LoginController;
 use App\Http\Controllers\Frontend\Auth\RegisterController;
 use App\Http\Controllers\Frontend\OrderController;
@@ -208,9 +209,18 @@ Route::group(['prefix' => 'frontend'], function() {
 
     // ACCOUNT
     Route::get('/login', [LoginController::class, 'index'])->name('login.index');
+    Route::post('/login', [LoginController::class, 'Userlogin']);
     Route::get('/register', [RegisterController::class, 'index'])->name('register.index');
-   
+    Route::post('/register', [RegisterController::class, 'UserRegister']);
+    Route::get('/logout', [LoginController::class, 'logout'])->name('auth.logout');
 
+    
 
+    //Subscriber
+    Route::post('/subscriber', [UserSubscriberController::class, 'subscriber'])->name('user.subscriber');
+    Route::post('/unsubscriber', [UserSubscriberController::class, 'unsubscriber'])->name('user.unsubscriber');
 
+    //productdetail
+    // Route::get('/logout', [LoginController::class, 'logout'])->name('auth.logout');
+    
 });
