@@ -111,7 +111,7 @@
                         <div class="product-default inner-quickview inner-icon">
                             <figure>
                                 <a href="{{route('product-detail.index',[ 'productId' => $item->id ])}}">
-                                    <img src="{{ asset('uploads/'.$item->image) }}"  width="205"
+                                    <img src="{{ asset($item->image) }}"  width="205"
                                         height="205')}}" alt="product">
                                 </a>
                                 <div class="btn-icon-group">
@@ -124,7 +124,7 @@
                             <div class="product-details">
                                 <div class="category-wrap">
                                     <div class="category-list">
-                                        <a href="demo18-shop.html" class="product-category">category</a>
+                                        <a href="demo18-shop.html" class="product-category">category: <b>{{$item->catalogues->name}}</b></a>
                                     </div>
                                     <a href="wishlist.html" title="Wishlist" class="btn-icon-wish"><i
                                             class="icon-heart"></i></a>
@@ -146,15 +146,17 @@
                     </div><!-- End .col-lg-3 -->
                         
                     @endforeach
-                   
+                  
                     
                 </div><!-- End .row -->
-
-                <div class="product-more-container d-flex justify-content-center">
+                {{$product->links()}}
+                {{-- <div class="product-more-container d-flex justify-content-center">
                     <a href="ajax/demo18-ajax-products.html" class="btn btn-outline-dark loadmore">Load
                         More...</a>
-                </div><!-- End .product-more-container -->
-            </div><!-- End .col-lg-9 -->
+                </div>
+                <!-- End .product-more-container --> --}}
+            </div>
+            <!-- End .col-lg-9 -->
 
             <div class="sidebar-overlay"></div>
             <aside class="sidebar-shop col-lg-3 order-lg-first mobile-sidebar">
