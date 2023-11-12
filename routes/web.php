@@ -13,12 +13,13 @@ use App\Http\Controllers\Backend\PermissionController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Backend\ErrorController;
 use App\Http\Controllers\Backend\PostController;
+use App\Http\Controllers\Backend\OrderAdminController;
 use App\Http\Controllers\Ajax\LocationController;
 use App\Http\Controllers\Backend\SubscriberController;
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\OrderController;
 use App\Http\Controllers\Frontend\Auth\LoginController;
 use App\Http\Controllers\Frontend\Auth\RegisterController;
-use App\Http\Controllers\Frontend\OrderController;
 use App\Http\Controllers\Frontend\ShopController;
 use App\Http\Middleware\LoginMiddleware;
 use App\Http\Middleware\AuthenticateMiddleware;
@@ -148,6 +149,27 @@ Route::group(['middleware' => ['admin']], function() {
         Route::get('{id}/delete', [SubscriberController::class, 'delete'])->name('subscriber.delete');
         Route::post('{id}/destroy', [SubscriberController::class, 'destroy'])->name('subscriber.destroy');
     });
+
+    // ORDER
+    Route::group(['prefix' => 'order'], function() {
+        Route::get('index', [OrderAdminController::class, 'index'])->name('order.index');
+        Route::get('{id}/show', [OrderAdminController::class, 'show'])->name('order.show');
+        Route::get('create', [OrderAdminController::class, 'create'])->name('order.create');
+        Route::post('store', [OrderAdminController::class, 'store'])->name('order.store');
+        Route::get('{id}/edit', [OrderAdminController::class, 'edit'])->name('order.edit');
+        Route::post('{id}/update', [OrderAdminController::class, 'update'])->name('order.update');
+        Route::get('{id}/delete', [OrderAdminController::class, 'delete'])->name('order.delete');
+        Route::post('{id}/destroy', [OrderAdminController::class, 'destroy'])->name('order.destroy');
+    });
+    // Route::group(['prefix' => 'order_detail'], function() {
+    //     Route::get('index', [OrderDetailAdminController::class, 'index'])->name('order.detail.index');
+    //     Route::get('create', [OrderDetailAdminController::class, 'create'])->name('order.detail.create');
+    //     Route::post('store', [OrderDetailAdminController::class, 'store'])->name('order.detail.store');
+    //     Route::get('{id}/edit', [OrderDetailAdminController::class, 'edit'])->name('order.detail.edit');
+    //     Route::post('{id}/update', [OrderDetailAdminController::class, 'update'])->name('order.detail.update');
+    //     Route::get('{id}/delete', [OrderDetailAdminController::class, 'delete'])->name('order.detail.delete');
+    //     Route::post('{id}/destroy', [OrderDetailAdminController::class, 'destroy'])->name('order.detail.destroy');
+    // });
 
 
 

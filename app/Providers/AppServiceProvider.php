@@ -24,6 +24,9 @@ class AppServiceProvider extends ServiceProvider
         'App\Services\Interfaces\PermissionServiceInterface'=> 'App\Services\PermissionService',
         'App\Repositories\Interfaces\PermissionRepositoryInterface'=> 'App\Repositories\PermissionRepository',
        
+        'App\Services\Interfaces\OrderAdminServiceInterface'=> 'App\Services\OrderAdminService',
+        'App\Repositories\Interfaces\OrderAdminRepositoryInterface'=> 'App\Repositories\OrderAdminRepository',
+       
         'App\Services\Interfaces\PostServiceInterface'=> 'App\Services\PostService',
         'App\Repositories\Interfaces\PostRepositoryInterface'=> 'App\Repositories\PostRepository',
 
