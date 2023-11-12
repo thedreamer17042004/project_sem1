@@ -62,14 +62,7 @@ return [
                     'title' => "QL Đơn Hàng",
                     'route' => "order/index"
                 ],
-                [
-                    'title' => "QL Chi tiết đơn hàng",
-                    'route' => "order/index"
-                ],
-                [
-                    'title' => "QL Payment",
-                    'route' => "order/index"
-                ],
+              
                
             ]
         ],

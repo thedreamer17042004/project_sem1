@@ -9,6 +9,10 @@
     margin-top: 20px;
     margin-bottom: 20px ;
 }
+.sptitle {
+    display: flex;
+    justify-content: space-between;
+}
 .tex {
     text-transform: uppercase;
     font-weight: normal;
@@ -291,4 +295,10 @@ input[name=canonical] {
 }
 .add-variant:hover{
     background: #efefef;
+}
+
+.td_order{
+    text-align: center;
+    font-size: 20px;
+    font-weight: bolder;
 }

@@ -107,6 +107,31 @@ return [
       
        
     ],
+
+    'order' => [
+        'index' => [
+            'title' => "Quản Lý đơn hàng",
+            'tableHeading' => "Danh sách đơn hàng "
+        ],
+        'create' => [
+            'title' => 'Thêm mới đơn hàng'
+        ],
+        'update' => [
+            'title' => 'Cập nhật đơn hàng'
+        ],
+        'delete' => [
+            'title' => 'Xóa đơn hàng'
+        ],
+        'show' => [
+            'title' => 'Chi tiết đơn hàng'
+        ],
+        'infomation' => 'Thông tin chung',
+        'code' => 'Mã sản phẩm',
+        'made_in' => 'Xuất sứ',
+        'price' => 'Gía sản phẩm'
+      
+       
+    ],
     'postCatalogue' => [
         'index' => [
             'title' => "Quản Lý nhóm bài viết",
