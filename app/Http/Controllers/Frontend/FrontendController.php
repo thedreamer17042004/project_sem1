@@ -30,6 +30,8 @@ class FrontendController extends Controller
        
         return view('frontend.home.home', compact('products', 'sub'));
     }
+
+    
    
     public function blog()
     {
