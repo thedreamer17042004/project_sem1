@@ -100,7 +100,7 @@
                             </ul>
 
                             <div class="product-action">
-                            <form action="" method="post">
+                            <form action="" method="POST">
                                 @csrf
                                 <input type="hidden" name="id" value="">
                                 <div class="product-single-qty">

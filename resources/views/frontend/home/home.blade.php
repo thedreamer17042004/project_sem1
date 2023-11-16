@@ -16,7 +16,11 @@
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="assets/images/icons/favicon.png">
-
+    <style>
+        .pagination{
+            justify-content: center !important;
+        }
+    </style>
 
     <script>
         WebFontConfig = {
@@ -1114,7 +1118,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="{{route('shop.index')}}">Product</a>
+                    <a href="{{route('shop.index')}}">Shop</a>
               
                 </li>
           

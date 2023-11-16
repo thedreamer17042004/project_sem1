@@ -1,5 +1,5 @@
 @extends('frontend.layouts.porto')
-@section('title', 'Product')
+@section('title', 'Shop')
 @section('main')
 <main class="main bg-gray">
     <div class="category-banner-container">
@@ -40,7 +40,6 @@
             </div>
         </div>
     </div>
-
     <nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
         <div class="container-fluid">
             <ol class="breadcrumb">
@@ -49,13 +48,13 @@
             </ol>
         </div>
     </nav>
-
     <div class="container-fluid bg-gray">
         <div class="row">
             <div class="col-lg-9 main-content shop-content">
                 <nav class="toolbox sticky-header" data-sticky-options="{'mobile': true}">
                     <div class="toolbox-left">
-                        <a href="#" class="sidebar-toggle"><svg data-name="Layer 3" id="Layer_3"
+                        <a href="#" class="sidebar-toggle">
+                            <svg data-name="Layer 3" id="Layer_3"
                                 viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                                 <line x1="15" x2="26" y1="9" y2="9" class="cls-1"></line>
                                 <line x1="6" x2="9" y1="9" y2="9" class="cls-1"></line>
@@ -74,52 +73,42 @@
                             </svg>
                             <span>Filter</span>
                         </a>
-
-                        <div class="toolbox-item toolbox-sort">
-                            <label>Sort By:</label>
-
-                            <div class="select-custom">
-                                <select name="orderby" class="form-control">
-                                    <option value="menu_order" selected="selected">Default sorting</option>
-                                    <option value="popularity">Sort by popularity</option>
-                                    <option value="rating">Sort by average rating</option>
-                                    <option value="date">Sort by newness</option>
-                                    <option value="price">Sort by price: low to high</option>
-                                    <option value="price-desc">Sort by price: high to low</option>
-                                </select>
-                            </div><!-- End .select-custom -->
-
-
-                        </div><!-- End .toolbox-item -->
-                    </div><!-- End .toolbox-left -->
-
+                        <form action="" method="get">
+                            <div class="toolbox-item toolbox-sort">
+                                <label>Sort By:</label>
+                                <input type="text" name="search" value="{{ request('search') ?: old('search')}}" placeholder="tìm kiếm">
+                                <button type="submit">Tìm kiếm</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- End .toolbox-left -->
                     <div class="toolbox-right">
                         <div class="toolbox-item layout-modes">
                             <a href="demo18-shop.html" class="layout-btn btn-grid active" title="Grid">
-                                <i class="icon-mode-grid"></i>
+                            <i class="icon-mode-grid"></i>
                             </a>
                             <a href="category-list.html" class="layout-btn btn-list" title="List">
-                                <i class="icon-mode-list"></i>
+                            <i class="icon-mode-list"></i>
                             </a>
-                        </div><!-- End .layout-modes -->
-                    </div><!-- End .toolbox-right -->
+                        </div>
+                        <!-- End .layout-modes -->
+                    </div>
+                    <!-- End .toolbox-right -->
                 </nav>
-
                 <div class="row product-ajax-grid mb-2">
-                    @foreach ($product as $item)
+                    @if( count($search) > 0)
+                    @foreach ($search as $item)
                     <div class="col-6 col-md-4 col-lg-3 col-xl-5col">
                         <div class="product-default inner-quickview inner-icon">
                             <figure>
                                 <a href="{{route('product-detail.index',[ 'productId' => $item->id ])}}">
-                                    <img src="{{ asset($item->image) }}"  width="205"
-                                        height="205')}}" alt="product">
+                                <img src="{{ asset($item->image) }}"  width="205"
+                                    height="205')}}" alt="product">
                                 </a>
                                 <div class="btn-icon-group">
                                     <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
-                                            class="icon-shopping-cart"></i></a>
+                                        class="icon-shopping-cart"></i></a>
                                 </div>
-                                {{-- <a href="ajax/product-quick-view.html" class="btn-quickview"
-                                    title="Quick View">Quick View</a> --}}
                             </figure>
                             <div class="product-details">
                                 <div class="category-wrap">
@@ -127,344 +116,142 @@
                                         <a href="demo18-shop.html" class="product-category">category: <b>{{$item->catalogues->name}}</b></a>
                                     </div>
                                     <a href="wishlist.html" title="Wishlist" class="btn-icon-wish"><i
-                                            class="icon-heart"></i></a>
+                                        class="icon-heart"></i></a>
                                 </div>
                                 <h3 class="product-title">
-                                    <a href="{{route('product-detail.index')}}">{{$item->name}}</a>
+                                    <a href="{{route('product-detail.index',[ 'productId' => $item->id ])}}">{{$item->name}}</a>
                                 </h3>
                                 <div class="ratings-container">
                                     <div class="product-ratings">
                                         <span class="ratings" style="width:100%"></span><!-- End .ratings -->
                                         <span class="tooltiptext tooltip-top"></span>
-                                    </div><!-- End .product-ratings -->
-                                </div><!-- End .product-container -->
+                                    </div>
+                                    <!-- End .product-ratings -->
+                                </div>
+                                <!-- End .product-container -->
                                 <div class="price-box">
                                     <span class="product-price"><b>$</b> {{number_format($item->price)}}</span>
-                                </div><!-- End .price-box -->
-                            </div><!-- End .product-details -->
+                                </div>
+                                <!-- End .price-box -->
+                            </div>
+                            <!-- End .product-details -->
                         </div>
-                    </div><!-- End .col-lg-3 -->
-                        
+                    </div>
+                    <!-- End .col-lg-3 -->
                     @endforeach
-                  
-                    
-                </div><!-- End .row -->
-                {{$product->links()}}
-                {{-- <div class="product-more-container d-flex justify-content-center">
-                    <a href="ajax/demo18-ajax-products.html" class="btn btn-outline-dark loadmore">Load
-                        More...</a>
+                    @endif
                 </div>
-                <!-- End .product-more-container --> --}}
+                <div class="link">
+                    {{$search->links()}}  
+                </div>
             </div>
             <!-- End .col-lg-9 -->
-
             <div class="sidebar-overlay"></div>
             <aside class="sidebar-shop col-lg-3 order-lg-first mobile-sidebar">
                 <div class="sidebar-wrapper">
                     <div class="widget">
                         <h3 class="widget-title">
                             <a data-toggle="collapse" href="#widget-body-2" role="button" aria-expanded="true"
-                                aria-controls="widget-body-2">Categories</a>
+                                aria-controls="widget-body-2">Danh Mục</a>
                         </h3>
-
                         <div class="collapse show" id="widget-body-2">
                             <div class="widget-body">
                                 <ul class="cat-list">
-                                    <li>
-                                        <a href="#widget-category-1" class="collapsed" data-toggle="collapse"
-                                            role="button" aria-expanded="true"
-                                            aria-controls="widget-category-1">
-                                            Accessories<span class="products-count">(3)</span>
-                                            <span class="toggle"></span>
-                                        </a>
-                                        <div class="collapse" id="widget-category-1">
-                                            <ul class="cat-sublist">
-                                                <li>Caps<span class="products-count">(1)</span></li>
-                                                <li>Watches<span class="products-count">(2)</span></li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <a href="#widget-category-2">
-                                            Electronics<span class="products-count">(8)</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#widget-category-3" class="collapsed" data-toggle="collapse"
-                                            role="button" aria-expanded="false"
-                                            aria-controls="widget-category-3">
-                                            Men<span class="products-count">(4)</span>
-                                            <span class="toggle"></span>
-                                        </a>
-                                        <div class="collapse" id="widget-category-3">
-                                            <ul class="cat-sublist">
-                                                <li>Boys<span class="products-count">(4)</span>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li><a href="#">Shoes<span class="products-count">(2)</span></a></li>
-                                    <li>
-                                        <a href="#widget-category-4" class="collapsed" data-toggle="collapse"
-                                            role="button" aria-expanded="false"
-                                            aria-controls="widget-category-4">
-                                            Women<span class="products-count">(5)</span>
-                                            <span class="toggle"></span>
-                                        </a>
-                                        <div class="collapse" id="widget-category-4">
-                                            <ul class="cat-sublist">
-                                                <li>Girls<span class="products-count">(4)</span></li>
-                                                <li>Trousers<span class="products-count">(1)</span></li>
-                                            </ul>
-                                        </div>
-                                    </li>
+                                    @foreach ($category as $item)
+                                    <li><a href="{{'/frontend/shop?catalogues='.$item->id}}" >{{$item->name}}<span class="products-count">({{count($item->products)}})</span></a></li>
+                                    @endforeach
                                 </ul>
-                            </div><!-- End .widget-body -->
-                        </div><!-- End .collapse -->
-                    </div><!-- End .widget -->
-
+                            </div>
+                            <!-- End .widget-body -->
+                        </div>
+                        <!-- End .collapse -->
+                    </div>
+                    <!-- End .widget -->
+                    
                     <div class="widget">
                         <h3 class="widget-title">
                             <a data-toggle="collapse" href="#widget-body-3" role="button" aria-expanded="true"
                                 aria-controls="widget-body-3">Price</a>
                         </h3>
-
                         <div class="collapse show" id="widget-body-3">
                             <div class="widget-body pb-0">
-                                <form action="#">
                                     <div class="price-slider-wrapper">
-                                        <div id="price-slider"></div><!-- End #price-slider -->
-                                    </div><!-- End .price-slider-wrapper -->
+                                        <div id="price-slider"></div>
+                                    </div>
 
-                                    <div
-                                        class="filter-price-action d-flex align-items-center justify-content-between flex-wrap">
+                                    <div class="filter-price-action d-flex align-items-center justify-content-between flex-wrap">
                                         <div class="filter-price-text">
                                             Price:
-                                            <span id="filter-price-range"></span>
-                                        </div><!-- End .filter-price-text -->
-
-                                        <button type="submit" class="btn btn-primary font2">Filter</button>
-                                    </div><!-- End .filter-price-action -->
+                                            <span id="filter-price-range"></span> <!--để lấy giá trị-->
+                                        </div>
+                                        <button type="button" class="btn btn-primary" id="filterPrice">Filter</button> 
+                                    </div>
+                                <form action="{{ route('shop.index') }}" method="GET" id="submitForm">
+                                    @csrf
+                                    <input name="rangePrice" type="hidden" value="" id="valueFilter">
                                 </form>
-                            </div><!-- End .widget-body -->
-                        </div><!-- End .collapse -->
-                    </div><!-- End .widget -->
-
-                    <div class="widget widget-color">
-                        <h3 class="widget-title">
-                            <a data-toggle="collapse" href="#widget-body-4" role="button" aria-expanded="true"
-                                aria-controls="widget-body-4">Color</a>
-                        </h3>
-
-                        <div class="collapse show" id="widget-body-4">
-                            <div class="widget-body pb-0">
-                                <ul class="config-swatch-list">
-                                    <li class="active">
-                                        <a href="#" style="background-color: #000;"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" style="background-color: #0188cc;"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" style="background-color: #81d742;"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" style="background-color: #6085a5;"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" style="background-color: #ab6e6e;"></a>
-                                    </li>
-                                </ul>
-                            </div><!-- End .widget-body -->
-                        </div><!-- End .collapse -->
-                    </div><!-- End .widget -->
-
-                    <div class="widget widget-size">
-                        <h3 class="widget-title">
-                            <a data-toggle="collapse" href="#widget-body-5" role="button" aria-expanded="true"
-                                aria-controls="widget-body-5">Size</a>
-                        </h3>
-
-                        <div class="collapse show" id="widget-body-5">
-                            <div class="widget-body">
-                                <ul class="config-size-list">
-                                    <li class="active"><a href="#">XL</a></li>
-                                    <li><a href="#">L</a></li>
-                                    <li><a href="#">M</a></li>
-                                    <li><a href="#">S</a></li>
-                                </ul>
-                            </div><!-- End .widget-body -->
-                        </div><!-- End .collapse -->
-                    </div><!-- End .widget -->
-
-                    <div class="widget">
-                        <h3 class="widget-title">
-                            <a data-toggle="collapse" href="#widget-body-6" role="button" aria-expanded="true"
-                                aria-controls="widget-body-6">Brand</a>
-                        </h3>
-
-                        <div class="collapse show" id="widget-body-6">
-                            <div class="widget-body pb-0">
-                                <ul class="brand-list">
-                                    <li><a href="#">Adidas</a></li>
-                                </ul>
-                            </div><!-- End .widget-body -->
-                        </div><!-- End .collapse -->
+                            </div>
+                        </div>
                     </div>
 
                     <div class="widget widget-featured">
                         <h3 class="widget-title">Featured</h3>
 
                         <div class="widget-body">
-                            <div class="owl-carousel widget-featured-products">
+                            <div class="">
                                 <div class="featured-col">
+                                    @foreach ($search as $key =>  $item)
+                                    @if($key < 3)
                                     <div class="product-default left-details product-widget">
                                         <figure>
-                                            <a href="{{route('product-detail.index')}}">
-                                                <img src="{{asset('assets/images/demoes/demo18/products/small/product-1.jpg"
-                                                    width="75" height="75')}}" alt="product" />
+                                            <a href="{{route('product-detail.index',[ 'productId' => $item->id ])}}">
+                                                <img src="{{asset ($item->image)}}" width="75" height="75" alt="product" />
                                             </a>
                                         </figure>
                                         <div class="product-details">
-                                            <h3 class="product-title">
-                                                <a href="{{route('product-detail.index')}}">Backpack Sfs Responder</a>
-                                            </h3>
+                                            <h3 class="product-title"> <a href="product.html">{{$item->name}}</a> </h3>
                                             <div class="ratings-container">
                                                 <div class="product-ratings">
                                                     <span class="ratings" style="width:100%"></span>
                                                     <!-- End .ratings -->
                                                     <span class="tooltiptext tooltip-top"></span>
-                                                </div><!-- End .product-ratings -->
-                                            </div><!-- End .product-container -->
+                                                </div>
+                                                <!-- End .product-ratings -->
+                                            </div>
+                                            <!-- End .product-container -->
                                             <div class="price-box">
-                                                <span class="product-price">$185.00</span>
-                                            </div><!-- End .price-box -->
-                                        </div><!-- End .product-details -->
+                                                <span class="product-price">${{$item->price}}</span>
+                                            </div>
+                                            <!-- End .price-box -->
+                                        </div>
+                                        <!-- End .product-details -->
                                     </div>
-                                    {{-- <div class="product-default left-details product-widget">
-                                        <figure>
-                                            <a href="{{route('product-detail.index')}}">
-                                                <img src="{{asset('assets/images/demoes/demo18/products/small/product-2.jpg"
-                                                    width="75" height="75')}}" alt="product" />
-                                            </a>
-                                        </figure>
-                                        <div class="product-details">
-                                            <h3 class="product-title">
-                                                <a href="{{route('product-detail.index')}}">Hot Black Suits</a>
-                                            </h3>
-                                            <div class="ratings-container">
-                                                <div class="product-ratings">
-                                                    <span class="ratings" style="width:80%"></span>
-                                                    <!-- End .ratings -->
-                                                    <span class="tooltiptext tooltip-top"></span>
-                                                </div><!-- End .product-ratings -->
-                                            </div><!-- End .product-container -->
-                                            <div class="price-box">
-                                                <span class="product-price">$30.00</span>
-                                            </div><!-- End .price-box -->
-                                        </div><!-- End .product-details -->
-                                    </div>
-                                    <div class="product-default left-details product-widget">
-                                        <figure>
-                                            <a href="{{route('product-detail.index')}}">
-                                                <img src="{{asset('assets/images/demoes/demo18/products/small/product-3.jpg"
-                                                    width="75" height="75')}}" alt="product" />
-                                            </a>
-                                        </figure>
-                                        <div class="product-details">
-                                            <h3 class="product-title">
-                                                <a href="{{route('product-detail.index')}}">Long-Length 2.0</a>
-                                            </h3>
-                                            <div class="ratings-container">
-                                                <div class="product-ratings">
-                                                    <span class="ratings" style="width:75%"></span>
-                                                    <!-- End .ratings -->
-                                                    <span class="tooltiptext tooltip-top"></span>
-                                                </div><!-- End .product-ratings -->
-                                            </div><!-- End .product-container -->
-                                            <div class="price-box">
-                                                <span class="product-price">$49.00</span>
-                                            </div><!-- End .price-box -->
-                                        </div><!-- End .product-details -->
-                                    </div> --}}
-                                </div><!-- End .featured-col -->
-                                {{-- <div class="featured-col">
-                                    <div class="product-default left-details product-widget">
-                                        <figure>
-                                            <a href="{{route('product-detail.index')}}">
-                                                <img src="{{asset('assets/images/demoes/demo18/products/small/product-1.jpg"
-                                                    width="75" height="75')}}" alt="product" />
-                                            </a>
-                                        </figure>
-                                        <div class="product-details">
-                                            <h3 class="product-title">
-                                                <a href="{{route('product-detail.index')}}">Backpack Sfs Responder</a>
-                                            </h3>
-                                            <div class="ratings-container">
-                                                <div class="product-ratings">
-                                                    <span class="ratings" style="width:100%"></span>
-                                                    <!-- End .ratings -->
-                                                    <span class="tooltiptext tooltip-top"></span>
-                                                </div><!-- End .product-ratings -->
-                                            </div><!-- End .product-container -->
-                                            <div class="price-box">
-                                                <span class="product-price">$185.00</span>
-                                            </div><!-- End .price-box -->
-                                        </div><!-- End .product-details -->
-                                    </div>
-                                    <div class="product-default left-details product-widget">
-                                        <figure>
-                                            <a href="{{route('product-detail.index')}}">
-                                                <img src="{{asset('assets/images/demoes/demo18/products/small/product-2.jpg"
-                                                    width="75" height="75')}}" alt="product" />
-                                            </a>
-                                        </figure>
-                                        <div class="product-details">
-                                            <h3 class="product-title">
-                                                <a href="{{route('product-detail.index')}}">Hot Black Suits</a>
-                                            </h3>
-                                            <div class="ratings-container">
-                                                <div class="product-ratings">
-                                                    <span class="ratings" style="width:80%"></span>
-                                                    <!-- End .ratings -->
-                                                    <span class="tooltiptext tooltip-top"></span>
-                                                </div><!-- End .product-ratings -->
-                                            </div><!-- End .product-container -->
-                                            <div class="price-box">
-                                                <span class="product-price">$30.00</span>
-                                            </div><!-- End .price-box -->
-                                        </div><!-- End .product-details -->
-                                    </div>
-                                    <div class="product-default left-details product-widget">
-                                        <figure>
-                                            <a href="{{route('product-detail.index')}}">
-                                                <img src="{{asset('assets/images/demoes/demo18/products/small/product-3.jpg"
-                                                    width="75" height="75')}}" alt="product" />
-                                            </a>
-                                        </figure>
-                                        <div class="product-details">
-                                            <h3 class="product-title">
-                                                <a href="{{route('product-detail.index')}}">Long-Length 2.0</a>
-                                            </h3>
-                                            <div class="ratings-container">
-                                                <div class="product-ratings">
-                                                    <span class="ratings" style="width:75%"></span>
-                                                    <!-- End .ratings -->
-                                                    <span class="tooltiptext tooltip-top"></span>
-                                                </div><!-- End .product-ratings -->
-                                            </div><!-- End .product-container -->
-                                            <div class="price-box">
-                                                <span class="product-price">$49.00</span>
-                                            </div><!-- End .price-box -->
-                                        </div><!-- End .product-details -->
-                                    </div>
-                                </div><!-- End .featured-col --> --}}
-                            </div><!-- End .widget-featured-slider -->
-                        </div><!-- End .widget-body -->
-                    </div><!-- End .widget -->
-                </div><!-- End .sidebar-wrapper -->
-            </aside><!-- End .col-lg-3 -->
-        </div><!-- End .row -->
-    </div><!-- End .container-fluid -->
-</main><!-- End .main -->
-    
+                                    @endif
+                                    @endforeach
+                                   
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End .widget-body -->
+                    </div>
+                    <!-- End .widget -->
+
+                    <div class="widget widget-block">
+                        <h3 class="widget-title">Custom HTML Block</h3>
+                        <h5>This is a custom sub-title.</h5>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non placerat mi. Etiam non tellus </p>
+                    </div>
+
+                </div>
+                <!-- End .sidebar-wrapper -->
+            </aside>
+            <!-- End .col-lg-3 -->
+        </div>
+        <!-- End .row -->
+    </div>
+    <!-- End .container-fluid -->
+</main>
+<!-- End .main -->
+
 @endsection
+<script src="{{asset ('assets/js/nouislider.min.js')}}"></script>
