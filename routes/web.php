@@ -237,7 +237,7 @@ Route::group(['prefix' => 'frontend'], function() {
     Route::post('/login', [LoginController::class, 'Userlogin']);
     Route::get('/register', [RegisterController::class, 'index'])->name('register.index');
     Route::post('/register', [RegisterController::class, 'UserRegister']);
-    Route::get('/logout', [LoginController::class, 'logout'])->name('auth.logout');
+    // Route::get('/logout', [LoginController::class, 'logout'])->name('auth.logout');
 
     
 
